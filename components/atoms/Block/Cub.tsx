@@ -16,13 +16,20 @@ const _Cub = styled.div`
   &:hover {
     background-color: rgba(255, 255, 255, 0.5);
   }
-
 `;
 
 interface IProps {
   children?: ReactNode;
+
+  onClick?: any;
+
+  click?: any;
 }
 
-export const Cub: FC<IProps> = ({ children }) => {
-  return <_Cub>{children}</_Cub>;
+export const Cub: FC<IProps> = ({ children, click, onClick }) => {
+  return (
+    <_Cub onClick={onClick} style={{ display: click ? "none" : "block" }}>
+      {children}
+    </_Cub>
+  );
 };

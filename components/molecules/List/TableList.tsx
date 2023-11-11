@@ -1,16 +1,40 @@
+import { useRef, useState, KeyboardEvent } from "react";
 import { Flex } from "@/components/atoms/FlexBox/Flex";
 import { AddGrayIcons, DotsGrayIcons } from "@/components/atoms/Icons";
 import { TSpan } from "@/components/atoms/Text/TSpan";
+import { _TextArea } from "@/components/atoms/Inputs/TextArea";
+import { useAutoSizeHeight } from "@/hooks/useAutoSize";
 
 const TableList = () => {
+  const [title, setTitle] = useState<string>(
+    "Senior Developerasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdaasdasdasdasasdasds"
+  );
+  const [display, setDisplay] = useState<boolean>(true);
+  const textAreaRef = useRef<HTMLTextAreaElement>(null);
+  useAutoSizeHeight(textAreaRef.current, title);
+
+  const handlerClick = (event: KeyboardEvent<HTMLTextAreaElement>) => {
+    if (event.key === "Enter") {
+      setDisplay(true);
+    }
+  };
+
   return (
     <>
       <div className="list__block">
         <div className="list__header">
-          <Flex justifyContent="space-between" alignItems="center">
-            <TSpan size={1.7} weight={700} color="#000">
-              Senior Developer
-            </TSpan>
+          <Flex justifyContent="space-between" alignItems="flex-start">
+            <_TextArea
+              weight={700}
+              value={title}
+              onClick={() => setDisplay(false)}
+              onChange={(e) => setTitle(e.target.value)}
+              rows={1}
+              ref={textAreaRef}
+              style={{ display: !display ? "block" : "false" }}
+              onKeyPress={handlerClick}
+              readOnly={display ? true : false}
+            />
             <DotsGrayIcons />
           </Flex>
         </div>
@@ -39,7 +63,9 @@ const TableList = () => {
         <div className="list__footer">
           <Flex alignItems="center" gap={1}>
             <AddGrayIcons />
-            <TSpan color="#000" size={1.7} weight={700}>Add a card</TSpan>
+            <TSpan color="#000" size={1.7} weight={700} click>
+              Add a card
+            </TSpan>
           </Flex>
         </div>
       </div>

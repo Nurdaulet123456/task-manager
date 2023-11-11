@@ -2,16 +2,20 @@ import styled from "@emotion/styled";
 import { FC } from "react";
 
 interface IInput {
-  search: boolean;
+  search?: boolean;
+
+  weight?: number;
 }
 
-const _Input = styled.input<Partial<IInput>>`
-background-color: rgba(255, 255, 255, 0.3);
+export const _Input = styled.input<Partial<IInput>>`
+  background-color: rgba(255, 255, 255, 0.3);
   border: none;
   border-radius: 5px;
 
   color: #fff;
   font-size: 1.8rem;
+
+  font-weight: ${(props) => props.weight};
 
   padding: 1.2rem;
 
@@ -28,13 +32,29 @@ background-color: rgba(255, 255, 255, 0.3);
 `;
 
 interface IProps {
-    search?: boolean;
+  search?: boolean;
+
+  text?: string;
+  setText?: any;
+
+  weight?: number;
+
+  width?: number;
+
+  onKeyPress?: any
 }
 
-export const Input: FC<IProps> = ({search}) => {
+export const Input: FC<IProps> = ({ search, text, setText, width, weight, onKeyPress }) => {
   return (
     <>
-      <_Input search={search}/>
+      <_Input
+        search={search}
+        value={text}
+        onChange={(e) => setText(e.target.value)}
+        style={{ width: `${width}ch` }}
+        weight={weight}
+        onKeyPress={onKeyPress}
+      />
     </>
   );
 };

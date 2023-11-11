@@ -1,3 +1,4 @@
+import { useEffect, useState, KeyboardEvent } from "react";
 import { Cub } from "../atoms/Block/Cub";
 import { Between } from "../atoms/Border/Between";
 import { Flex } from "../atoms/FlexBox/Flex";
@@ -9,17 +10,44 @@ import {
   StarIcons,
 } from "../atoms/Icons";
 import { Text } from "../atoms/Text/Text";
+import { Input } from "../atoms/Inputs/Inputs";
+import { useAutoSizeWidth } from "@/hooks/useAutoSize";
 
 const SettingBlock = () => {
+  const [title, setTitle] = useState<string>("Frontend developer");
+  const [width, setWidth] = useState(0);
+
+  const [display, setDisplay] = useState<boolean>(true);
+
+  useAutoSizeWidth(title, setWidth);
+
+  const handlerClick = (event: KeyboardEvent<HTMLInputElement>) => {
+    if (event.key === "Enter") {
+      setDisplay(true);
+    }
+  };
+
   return (
     <>
       <section className="section">
         <div className="container">
           <div className="setting">
             <Flex gap={1}>
-              <Cub>
-                <Text>Frontend developer</Text>
-              </Cub>
+              {display && (
+                <Cub click={!display} onClick={() => setDisplay(false)}>
+                  <Text>{title}</Text>
+                </Cub>
+              )}
+
+              {!display && (
+                <Input
+                  text={title}
+                  setText={setTitle}
+                  width={width}
+                  weight={700}
+                  onKeyPress={handlerClick}
+                />
+              )}
 
               <Cub>
                 <StarIcons />

@@ -1,17 +1,12 @@
 .list
     &__block
         padding-inline: 1.1rem
-        width: 272px
+        width: 100%
+        max-width: 272px
         padding-block: .8rem
         background-color: #EBECF0
 
         border-radius: 5px
-
-        vertical-align: top
-        scroll-margin: 8px
-
-        white-space: normal
-        max-height: 100%
 
     &__header
         margin-bottom: 1.6rem
@@ -20,8 +15,9 @@
             cursor: pointer
 
         .tspan
-            flex: 5
-            
+            width: 85%
+            max-width: 100%
+
             padding-block: .8rem
             padding-inline: .8rem
             border-radius: 5px
@@ -30,9 +26,8 @@
 
             &:hover 
                 background-color: rgba(0,0,0,.1)
-
-        svg
-            flex: 1
+        
+      
 
     &__info
 

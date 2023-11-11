@@ -1,6 +1,6 @@
 import React from "react";
 import { AdminIcons, ClubIcons, HomeIcons, ImportIcons, NotificationIcons } from "../atoms/Icons";
-import { Input } from "../atoms/Inputs/Inputs";
+import { _Input } from "../atoms/Inputs/Inputs";
 
 const Header = () => {
   return (
@@ -17,7 +17,7 @@ const Header = () => {
                 <HomeIcons />
               </div>
 
-              <Input search/>
+              <_Input search/>
             </div>
 
             <div className="header__inner-center">
