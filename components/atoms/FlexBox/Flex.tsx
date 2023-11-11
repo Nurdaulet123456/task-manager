@@ -30,14 +30,8 @@ const _Flex = styled.div<IFlex>`
   }
 `;
 
-interface IProps {
+interface IProps extends IFlex {
   children?: ReactNode;
-
-  justifyContent?: string;
-  alignItems?: string;
-
-  gap?: number;
-  border?: boolean;
 }
 
 export const Flex: FC<IProps> = ({

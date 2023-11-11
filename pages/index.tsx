@@ -1,3 +1,4 @@
+import List from "@/components/organisms/List";
 import Setting from "@/components/organisms/Setting";
 import MainLayouts from "@/layouts/MainLayouts";
 
@@ -6,6 +7,10 @@ const MainPage = () => {
     <>
       <MainLayouts title="Trello">
         <Setting />
+
+        <hr />
+
+        <List />
       </MainLayouts>
     </>
   );
