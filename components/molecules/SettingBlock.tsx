@@ -12,34 +12,39 @@ import {
 import { Text } from "../atoms/Text/Text";
 import { Input } from "../atoms/Inputs/Inputs";
 import { useAutoSizeWidth } from "@/hooks/useAutoSize";
+import { useComponentVisible } from "@/hooks/useComponentVisible";
 
 const SettingBlock = () => {
   const [title, setTitle] = useState<string>("Frontend developer");
   const [width, setWidth] = useState(0);
 
-  const [display, setDisplay] = useState<boolean>(true);
+  const { ref, isComponentVisible, setIsComponentVisible } =
+    useComponentVisible(false);
 
   useAutoSizeWidth(title, setWidth);
 
   const handlerClick = (event: KeyboardEvent<HTMLInputElement>) => {
     if (event.key === "Enter") {
-      setDisplay(true);
+      setIsComponentVisible(false);
     }
   };
 
   return (
     <>
-      <section className="section">
+      <section className="section" ref={ref}>
         <div className="container">
           <div className="setting">
             <Flex gap={1}>
-              {display && (
-                <Cub click={!display} onClick={() => setDisplay(false)}>
+              {!isComponentVisible && (
+                <Cub
+                  click={isComponentVisible}
+                  onClick={() => setIsComponentVisible(true)}
+                >
                   <Text>{title}</Text>
                 </Cub>
               )}
 
-              {!display && (
+              {isComponentVisible && (
                 <Input
                   text={title}
                   setText={setTitle}

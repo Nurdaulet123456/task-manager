@@ -5,34 +5,37 @@ import { TSpan } from "@/components/atoms/Text/TSpan";
 import { _TextArea } from "@/components/atoms/Inputs/TextArea";
 import { useAutoSizeHeight } from "@/hooks/useAutoSize";
 import { ColorMark } from "@/components/atoms/Block/ColorMark";
+import { useComponentVisible } from "@/hooks/useComponentVisible";
 
 const TableList = () => {
   const [title, setTitle] = useState<string>("Senior");
-  const [display, setDisplay] = useState<boolean>(true);
   const textAreaRef = useRef<HTMLTextAreaElement>(null);
   useAutoSizeHeight(textAreaRef.current, title);
 
   const handlerClick = (event: KeyboardEvent<HTMLTextAreaElement>) => {
     if (event.key === "Enter") {
-      setDisplay(true);
+      setIsComponentVisible(false);
     }
   };
 
+  const { ref, isComponentVisible, setIsComponentVisible } =
+    useComponentVisible(false);
+
   return (
     <>
-      <div className="list__block">
+      <div className="list__block" ref={ref}>
         <div className="list__header">
           <Flex justifyContent="space-between" alignItems="flex-start">
             <_TextArea
               weight={700}
               value={title}
-              onClick={() => setDisplay(false)}
+              onClick={() => setIsComponentVisible(true)}
               onChange={(e) => setTitle(e.target.value)}
               rows={1}
               ref={textAreaRef}
-              style={{ display: !display ? "block" : "false" }}
+              style={{ display: isComponentVisible ? "block" : "false" }}
               onKeyPress={handlerClick}
-              readOnly={display ? true : false}
+              readOnly={!isComponentVisible ? true : false}
             />
             <DotsGrayIcons />
           </Flex>
