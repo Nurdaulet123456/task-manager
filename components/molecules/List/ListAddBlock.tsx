@@ -7,14 +7,13 @@ const ListAddBlock = () => {
   return (
     <>
       <Flex alignItems="flex-start" gap={2.4}>
+        <TableList />
         <Cub>
           <Flex gap={1} alignItems="center">
             <AddIcons />
             Add another list
           </Flex>
         </Cub>
-
-        <TableList />
       </Flex>
     </>
   );

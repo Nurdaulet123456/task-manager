@@ -21,4 +21,4 @@ export const useAutoSizeWidth = (value?: string, setWidth?: Dispatch<SetStateAct
             setWidth(0);
         }
     }, [value]);
-}
+} 

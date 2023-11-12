@@ -4,11 +4,10 @@ import { AddGrayIcons, DotsGrayIcons } from "@/components/atoms/Icons";
 import { TSpan } from "@/components/atoms/Text/TSpan";
 import { _TextArea } from "@/components/atoms/Inputs/TextArea";
 import { useAutoSizeHeight } from "@/hooks/useAutoSize";
+import { ColorMark } from "@/components/atoms/Block/ColorMark";
 
 const TableList = () => {
-  const [title, setTitle] = useState<string>(
-    "Senior Developerasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdaasdasdasdasasdasds"
-  );
+  const [title, setTitle] = useState<string>("Senior");
   const [display, setDisplay] = useState<boolean>(true);
   const textAreaRef = useRef<HTMLTextAreaElement>(null);
   useAutoSizeHeight(textAreaRef.current, title);
@@ -41,7 +40,10 @@ const TableList = () => {
 
         <ul className="list__info">
           <li>
-            <div className="list__text">Nginx</div>
+            <div className="list__text">
+              <ColorMark color="red" />
+              Nginx
+            </div>
           </li>
 
           <li>
