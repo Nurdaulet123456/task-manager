@@ -13,6 +13,7 @@ import { Text } from "../atoms/Text/Text";
 import { Input } from "../atoms/Inputs/Inputs";
 import { useAutoSizeWidth } from "@/hooks/useAutoSize";
 import { useComponentVisible } from "@/hooks/useComponentVisible";
+import { handlerClick } from "@/utils/utils";
 
 const SettingBlock = () => {
   const [title, setTitle] = useState<string>("Frontend developer");
@@ -23,48 +24,46 @@ const SettingBlock = () => {
 
   useAutoSizeWidth(title, setWidth);
 
-  const handlerClick = (event: KeyboardEvent<HTMLInputElement>) => {
-    if (event.key === "Enter") {
-      setIsComponentVisible(false);
-    }
-  };
-
   return (
     <>
-      <section className="section" ref={ref}>
+      <section className="section">
         <div className="container">
           <div className="setting">
-            <Flex gap={1}>
-              {!isComponentVisible && (
-                <Cub
-                  click={isComponentVisible}
-                  onClick={() => setIsComponentVisible(true)}
-                >
-                  <Text>{title}</Text>
+            <div ref={ref}>
+              <Flex gap={1}>
+                {!isComponentVisible && (
+                  <Cub
+                    click={isComponentVisible}
+                    onClick={() => setIsComponentVisible(true)}
+                  >
+                    <Text>{title}</Text>
+                  </Cub>
+                )}
+
+                {isComponentVisible && (
+                  <Input
+                    text={title}
+                    setText={setTitle}
+                    width={width}
+                    weight={700}
+                    onKeyPress={(e: KeyboardEvent<HTMLInputElement>) =>
+                      handlerClick(e, setIsComponentVisible)
+                    }
+                  />
+                )}
+
+                <Cub>
+                  <StarIcons />
                 </Cub>
-              )}
 
-              {isComponentVisible && (
-                <Input
-                  text={title}
-                  setText={setTitle}
-                  width={width}
-                  weight={700}
-                  onKeyPress={handlerClick}
-                />
-              )}
-
-              <Cub>
-                <StarIcons />
-              </Cub>
-
-              <Cub>
-                <Flex gap={1} alignItems="center">
-                  <BoardSettingIcons />
-                  <ArrowDown />
-                </Flex>
-              </Cub>
-            </Flex>
+                <Cub>
+                  <Flex gap={1} alignItems="center">
+                    <BoardSettingIcons />
+                    <ArrowDown />
+                  </Flex>
+                </Cub>
+              </Flex>
+            </div>
 
             <Flex gap={1} border>
               <Cub>

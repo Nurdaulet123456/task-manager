@@ -1,4 +1,10 @@
 .list
+
+    &__mark
+        display: flex
+        align-items: center
+        justify-content: space-between
+
     &__block
         padding-inline: 1.1rem
         width: 100%
@@ -46,6 +52,28 @@
         padding: 1rem
         border-radius: 5px
         width: 100%
+
+        position: relative
+
+    &__pen
+        position: absolute
+        top: 5px
+        right: 10px
+
+        width: 30px
+        height: 30px
+
+        
+        border-radius: 50%
+
+        transition: background-color .2s linear
+
+        display: flex
+        align-items: center
+        justify-content: center
+
+        &:hover
+            background-color: rgba(0,0,0,0.05)
 
     &__footer
         padding-block: 1rem
