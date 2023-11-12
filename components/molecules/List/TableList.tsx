@@ -1,4 +1,4 @@
-import { useRef, useState, KeyboardEvent } from "react";
+import { useState, KeyboardEvent } from "react";
 import { Flex } from "@/components/atoms/FlexBox/Flex";
 import { AddGrayIcons, DotsGrayIcons } from "@/components/atoms/Icons";
 import { TSpan } from "@/components/atoms/Text/TSpan";
@@ -9,8 +9,8 @@ import { useComponentVisible } from "@/hooks/useComponentVisible";
 
 const TableList = () => {
   const [title, setTitle] = useState<string>("Senior");
-  const textAreaRef = useRef<HTMLTextAreaElement>(null);
-  useAutoSizeHeight(textAreaRef.current, title);
+
+  const textAreaRef = useAutoSizeHeight(title);
 
   const handlerClick = (event: KeyboardEvent<HTMLTextAreaElement>) => {
     if (event.key === "Enter") {

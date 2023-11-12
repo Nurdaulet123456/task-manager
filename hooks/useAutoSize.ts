@@ -1,16 +1,17 @@
-import { useEffect, Dispatch, SetStateAction } from "react";
+import { useEffect, Dispatch, SetStateAction, useRef } from "react";
 
-export const useAutoSizeHeight = (textAreaRef: HTMLTextAreaElement | null,
+export const useAutoSizeHeight = (
     value: string) => {
+    const textAreaRef = useRef<HTMLTextAreaElement | null>(null);
 
     useEffect(() => {
-        if (textAreaRef) {
-            textAreaRef.style.height = value.length + "px";
-            const scrollHeight = textAreaRef.scrollHeight;
-            textAreaRef.style.height = scrollHeight + "px";
+        if (textAreaRef.current) {
+            textAreaRef.current.style.height = "auto"; 
+            textAreaRef.current.style.height = textAreaRef.current.scrollHeight + "px";
         }
-    }, [textAreaRef, value]);
+    }, [value]);
 
+    return textAreaRef;
 }
 
 export const useAutoSizeWidth = (value?: string, setWidth?: Dispatch<SetStateAction<number>>) => {
